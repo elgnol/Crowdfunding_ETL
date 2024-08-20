@@ -33,14 +33,3 @@ Inspect the four CSV files, and then sketch an ERD of the tables by using QuickD
 
 ![QuickDBD-Free Diagram.png](https://github.com/elgnol/Crowdfunding_ETL/blob/main/Resources/QuickDBD-Free%20Diagram.png)
 
-Save the database schema as a Postgres file named crowdfunding_db_schema.sql, and save it to your GitHub repository.
-
-Create a new Postgres database, named crowdfunding_db.
-
-Using the database schema, create the tables in the correct order to handle the foreign keys.
-
-Verify the table creation by running a SELECT statement for each table.
-
-Import each CSV file into its corresponding SQL table.
-
-Verify that each table has the correct data by running a SELECT statement for each.
