@@ -3,38 +3,61 @@ DROP TABLE IF EXISTS category;
 DROP TABLE IF EXISTS subcategory;
 DROP TABLE IF EXISTS campaign;
 
--- Create table for Contacts
-CREATE TABLE contacts (
-    contact_id INT PRIMARY KEY,
-    first_name VARCHAR(20),
-    last_name VARCHAR(20),
-    email VARCHAR()
+CREATE TABLE "campaign" (
+    "cf_id" INT NOT NULL,
+    "contact_id" INT NOT NULL,
+    "company_name" VARCHAR(50) NOT NULL,
+    "description" VARCHAR(255) NOT NULL,
+    "goal" FLOAT NOT NULL,
+    "pledged" FLOAT NOT NULL,
+    "backers_count" INT NOT NULL,
+    "country" VARCHAR(10) NOT NULL,
+    "currency" VARCHAR(10) NOT NULL,
+    "launch_date" DATE NOT NULL,
+    "end_date" DATE NOT NULL,
+    "category_id" VARCHAR(10) NOT NULL,
+    "subcategory_id" VARCHAR(10) NOT NULL,
+    CONSTRAINT "pk_campaign" PRIMARY KEY (
+        "cf_id"
+     )
 );
 
--- Create table for Category
-CREATE TABLE category (
-    category_id VARCHAR(10) PRIMARY KEY,
-    category VARCHAR(20)
+CREATE TABLE "contacts" (
+    "contact_id" INT NOT NULL,
+    "first_name" VARCHAR(20) NOT NULL,
+    "last_name" VARCHAR(20) NOT NULL,
+    "email" VARCHAR(100) NOT NULL,
+    CONSTRAINT "pk_contacts" PRIMARY KEY (
+        "contact_id"
+     )
 );
 
--- Create table for Subcategory
-CREATE TABLE subcategory (
-    subcategory_id VARCHAR(10) PRIMARY KEY,
-    sub_category VARCHAR(20)
+CREATE TABLE "category" (
+    "category_id" VARCHAR(10) NOT NULL,
+    "category" VARCHAR(20) NOT NULL,
+    CONSTRAINT "pk_category" PRIMARY KEY (
+        "category_id"
+     )
 );
 
--- Create table for Campaign
-CREATE TABLE campaign (
-    cf_id INT PRIMARY KEY,
-    contact_id INT REFERENCES contacts(contact_id),
-    company_name VARCHAR(50),
-    goal INT,
-    pledged INT,
-    backers_count INT,
-    country VARCHAR(2),
-    currency VARCHAR(3),
-    launch_date DATE,
-    end_date DATE,
-    category_id VARCHAR(10) REFERENCES category(category_id),
-    subcategory_id VARCHAR(10) REFERENCES subcategory(subcategory_id)
+CREATE TABLE "subcategory" (
+    "subcategory_id" VARCHAR(10) NOT NULL,
+    "sub-category" VARCHAR(20) NOT NULL,
+    CONSTRAINT "pk_subcategory" PRIMARY KEY (
+        "subcategory_id"
+     )
 );
+
+ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_contact_id" FOREIGN KEY("contact_id")
+REFERENCES "contacts" ("contact_id");
+
+ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_category_id" FOREIGN KEY("category_id")
+REFERENCES "category" ("category_id");
+
+ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_subcategory_id" FOREIGN KEY("subcategory_id")
+REFERENCES "subcategory" ("subcategory_id");
+
+-- SELECT * FROM contacts;
+-- SELECT * FROM category;
+-- SELECT * FROM subcategory;
+-- SELECT * FROM campaign;
